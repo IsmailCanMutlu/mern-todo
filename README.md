@@ -6,6 +6,9 @@ A CRUD application where you can do basic Crud operations using Node, Express, M
 
 
 Planned for later
-. Create proper authentication
-. Diversify the tests
-. Create frontend items(navbaar,home,register) using rest
+
+Create proper authentication
+
+Diversify the tests
+
+Create frontend items(navbaar,home,register) using rest
