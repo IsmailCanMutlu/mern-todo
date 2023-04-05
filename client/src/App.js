@@ -6,7 +6,7 @@ function App() {
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
-    fetch('/api/todos')
+    fetch('http://localhost:5000/api/todos')
       .then((res) => res.json())
       .then((data) => setTodos(data.todos))
       .catch((err) => console.log(err));
@@ -14,7 +14,7 @@ function App() {
 
   const handleAddTodo = () => {
     if (newTodo.trim() === '') return;
-    fetch('/api/todos', {
+    fetch('http://localhost:5000/api/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: newTodo }),
@@ -26,9 +26,10 @@ function App() {
       })
       .catch((err) => console.log(err));
   };
+  
 
   const handleDeleteTodo = (id) => {
-    fetch(`/api/todos/${id}`, { method: 'DELETE' })
+    fetch(`http://localhost:5000/api/todos/${id}`, { method: 'DELETE' })
       .then((res) => res.json())
       .then((data) => {
         const updatedTodos = todos.filter((todo) => todo._id !== id);
@@ -38,7 +39,7 @@ function App() {
   };
 
   const handleUpdateTodo = (id, name) => {
-    fetch(`/api/todos/${id}`, {
+    fetch(`http://localhost:5000/api/todos/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
@@ -71,9 +72,10 @@ function App() {
           Add
         </button>
       </div>
-      {todos.map((todo) => (
-        <Todo key={todo._id} todo={todo} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} />
-      ))}
+      {todos && todos.map((todo) => (
+  <Todo key={todo._id} todo={todo} onDelete={handleDeleteTodo} onUpdate={handleUpdateTodo} />
+))}
+
     </div>
   );
 }
