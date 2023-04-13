@@ -52,7 +52,10 @@ When you open the app, you can add a new todo on the homepage. All the todos you
 ## Testing
 
 Backend and frontend tests were written using Jest and Supertest in this project. You can run the tests using the following command:
+```bash 
 npm test
+```
+
 ## Contributing
 
 Thank you for your contributions.
