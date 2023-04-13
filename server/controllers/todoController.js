@@ -19,6 +19,9 @@ const getTodoById = async (req, res) => {
     res.json(todo);
   } catch (err) {
     console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Todo not found' });
+    }
     res.status(500).send('Server Error');
   }
 };
@@ -29,7 +32,7 @@ const createTodo = async (req, res) => {
     res.json(todo);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send('Failed to create todo');
   }
 };
 
@@ -42,7 +45,10 @@ const updateTodo = async (req, res) => {
     res.json(todo);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Todo not found' });
+    }
+    res.status(500).send('Todo could not be updated');
   }
 };
 
@@ -55,6 +61,9 @@ const deleteTodo = async (req, res) => {
     res.json({ msg: 'Todo removed' });
   } catch (err) {
     console.error(err.message);
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ msg: 'Todo not found' });
+    }
     res.status(500).send('Server Error');
   }
 };
